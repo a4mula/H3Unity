@@ -1,0 +1,145 @@
+---
+
+# 📘 H3Unity SDK – API Reference (Plain Text)
+
+## Namespace: `H3Unity`
+
+---
+
+## 🧠 Class: `H3`
+Main entry point for conversions and interop with native H3 backend.
+
+### Method: `FromLatLng(double lat, double lng, int resolution): ulong`
+- Converts latitude/longitude to H3 index.
+- Parameters:
+  - `lat`: Latitude in degrees
+  - `lng`: Longitude in degrees
+  - `resolution`: Target resolution (0–15)
+- Returns: H3 index as `ulong`
+- Throws: `H3Exception` if resolution is invalid or native call fails
+
+### Method: `ToLatLng(ulong h3Index): (double lat, double lng)`
+- Converts H3 index back to geographic coordinates.
+- Parameters:
+  - `h3Index`: H3 cell ID
+- Returns: Tuple of `(lat, lng)` in degrees
+- Throws: `H3Exception` on invalid index
+
+### Method: `ToParent(ulong h3Index, int parentResolution): ulong`
+- Gets parent cell at lower resolution.
+- Parameters:
+  - `h3Index`: H3 cell
+  - `parentResolution`: Target resolution (< current)
+- Returns: Parent H3 index
+- Throws: `H3Exception` if invalid resolution
+
+### Method: `ToChildren(ulong h3Index, int childResolution): ulong[]`
+- Gets all child cells of the given H3 index.
+- Parameters:
+  - `h3Index`: Parent cell
+  - `childResolution`: Resolution > current
+- Returns: Array of child indices
+- Throws: `H3Exception` on resolution mismatch
+
+---
+
+## 🔣 Class: `H3Native`
+Internal static class for P/Invoke bridging.
+
+### Native Constants:
+- `MAX_RES = 15`
+- `NUM_BASE_CELLS = 122`
+
+### Method: `maxResolution(): int`
+- Returns: 15
+- [DllImport] for sanity check
+
+> All native calls are wrapped internally by `H3` and marshaled safely. Do not call directly unless debugging.
+
+---
+
+## ⚠️ Class: `H3Exception`
+Custom exception thrown by any H3Interop failure.
+
+### Constructor: `H3Exception(string message)`
+- Wraps native error codes or context
+- Use in try/catch around calls to `H3.*`
+
+---
+
+## 🔧 Class: `H3Utils`
+Utility methods for edge-case validation and conversion.
+
+### Method: `IsValid(ulong h3Index): bool`
+- Checks if an index is structurally valid.
+
+### Method: `GetResolution(ulong h3Index): int`
+- Returns the resolution (0–15) from H3 bitmask.
+
+### Method: `GetBaseCell(ulong h3Index): int`
+- Returns the base cell number (0–121)
+
+---
+
+## 🎮 MonoBehaviour: `H3Cell`
+Single cell visualizer.
+
+### Fields:
+- `ulong h3Index`
+- `Color fillColor`
+- `bool showBorder`
+
+### Method: `void OnDrawGizmos()`
+- Draws cell outline and fill in editor/scene
+
+---
+
+## 🎮 MonoBehaviour: `H3Grid`
+Multi-cell region renderer.
+
+### Fields:
+- `List<ulong> h3Indices`
+- `Color borderColor`
+- `Color fillColor`
+- `bool dynamicUpdate`
+
+### Method: `void UpdateGrid()`
+- Re-renders all cells based on current indices
+
+---
+
+## 🧪 Class: `H3ValidationSuite`
+Formal tests validating:
+- LatLng ↔ H3 conversion
+- Child-parent hierarchy
+- Edge cases (0, 15 resolution)
+- Exception handling
+
+Run via Unity Test Runner → EditMode
+
+---
+
+## 📂 Data Types
+
+### `H3Types.cs`
+- Contains `H3Resolution`, `H3Coord`, and enum scaffolding
+- Used internally to manage types and interfaces
+
+---
+
+## 📜 Notes
+
+- All native calls use `DllImport("h3")`
+- Native backend: `Plugins/h3.dll` included
+- Resolution range: `0 ≤ res ≤ 15` — anything outside throws `H3Exception`
+- All interop calls validated with test coverage
+
+---
+
+## 📝 Documentation Files
+
+- `README.md`: Install, usage, licensing
+- `LICENSE.txt`: SDK license (MIT)
+- `LICENSE.thirdparty.txt`: Uber's H3 backend license (Apache 2.0)
+
+---
