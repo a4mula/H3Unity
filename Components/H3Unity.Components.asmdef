@@ -1,0 +1,11 @@
+{
+  "name": "H3Unity.Components",
+  "rootNamespace": "H3Unity.Components",
+  "references": [
+    "H3Unity"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "autoReferenced": true
+}

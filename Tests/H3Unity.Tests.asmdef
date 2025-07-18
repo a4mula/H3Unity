@@ -1,0 +1,20 @@
+{
+  "name": "H3Unity.Tests",
+  "rootNamespace": "H3Unity.Tests",
+  "references": [
+    "H3Unity"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": false,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "optionalUnityReferences": [
+    "TestAssemblies"
+  ]
+}

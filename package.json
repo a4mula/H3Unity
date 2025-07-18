@@ -1,0 +1,25 @@
+{
+  "name": "com.a4mula.h3unity",
+  "displayName": "H3Unity",
+  "version": "1.0.0",
+  "unity": "2021.3",
+  "description": "Unity-native wrapper for Uber's H3 hexagonal indexing system. Includes runtime interop, editor tooling, components, and test suite.",
+  "author": {
+    "name": "Robb",
+    "url": "https://github.com/a4mula"
+  },
+  "license": "MIT",
+  "keywords": [
+    "h3",
+    "spatial",
+    "hex",
+    "indexing",
+    "mapping",
+    "gis",
+    "unity",
+    "sdk"
+  ],
+  "dependencies": {
+    "com.unity.test-framework": "1.1.33"
+  }
+}

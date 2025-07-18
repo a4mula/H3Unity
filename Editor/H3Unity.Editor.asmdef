@@ -1,0 +1,14 @@
+{
+  "name": "H3Unity.Editor",
+  "rootNamespace": "H3Unity.Editor",
+  "references": [
+    "H3Unity",
+    "H3Unity.Components"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "autoReferenced": false
+}
